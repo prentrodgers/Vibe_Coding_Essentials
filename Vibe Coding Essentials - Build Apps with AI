@@ -96,3 +96,7 @@ Next up Vibe Coding with GitHub Copilot
         : { "file": ".github/copilot-instructions.md" }
         ]
         }
+    Copilot can generate pull requests with comments. 
+    And code review on Github.com or inside vscode. 
+    Inside vscode, click the Source Code icon on the left, then there are several icons at the top. Click the one that says Code Review, and it will review all the code in the repo. 
+    
