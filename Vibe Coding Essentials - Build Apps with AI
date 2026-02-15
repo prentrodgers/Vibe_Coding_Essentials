@@ -1,0 +1,98 @@
+Notes on the Coursera course: Vibe Coding Essentials - Build Apps with AI
+2/12/26
+https://www.coursera.org/learn/vibe-coding-with-cursor-ai
+
+Setting up Cursor AI - a fork of vscode - Taught by Maham Codes
+        cd ~/Downloads
+        ls -lth cursor_2.4.35_amd64.deb 
+            -rw-rw-r-- 1 prent prent 168M Feb 12 11:14 cursor_2.4.35_amd64.deb
+        sudo apt install ./cursor_2.4.35_amd64.deb 
+    Signed in to cursor.com as prent.rodgers@gmail.com - start with a two week hobby trial for free.
+    Cursor provided me with an API key: key_b... saved in 1Password under Cursor API in API Crednetials.
+    It opens a vscode like session with everything set up to access the needed API's for vibe coding. See: 
+        pwd
+            /home/prent/Repos/One-footed-bride-tuning
+    This looks like a really useful tool. But I don't want to clone my project yet because I've made changes that aren't in the repo yet. 
+
+    I updated all the changes I wanted in One-footed-bride-tuning, pushed it to github, then removed the copy inside TonicNet. It was just causing confusion. Switch to Cursor for a few days.
+
+    Notes on the next steps for the One-footed-Bride-Tuning repo.
+
+    Keys to remember: 
+    Word Wrap: alt-z turns word wrap on and off.
+    To find cursor settings, file --> preferences --> cursor settings
+    Inside cursor settings, lots of options, including Docs (for Cursor), Indexing and Docs (yours)
+    If the files list disappears, press ctrl-b and it comes back. 
+
+    1. Add Docstring, argument types, and return types to all the functions in adaptive_tuning_util.py and diamond_music_utils.py so that when you hover over a library, it is self documenting.
+        a. Set up types for all arguments and return values so that the caller knows what to expect.
+    Save this for later:
+        b. If a function is no longer needed by this repo, it should be commented out, unless you think you might need it soon.
+
+    The Yolo mode, auto-run option. File --> Preferences --> Cursor settings --> Auto-Run Mode. 
+    Key to influencing how cursor works is to add context, done with the @ sign. 
+
+---------------
+2/13/26 Debugging and Enhancing with Cursor.
+    Red highlighted sections (purple on my screen) are code that cursor has removed 
+    Green highlights (olive green on my screen) is code that cursor has added. 
+
+    Four modes: Agent, Plan, Debug, Ask
+    Highlight a section of code and see at the bottom that you get options to Add to Chat (ctrl-i) or Edit (ctrl-k). For example, I highlighted the previous sentence, and clicked on Edit. This opened a window and a wrote: change alt- to ctrl-, and clicked on accept (I think), and it changed alt-i and alt-k to ctlr-i and ctrl-k in the sentence highlighted. Neat. 
+    You can paste files into the chat session, perhaps images copied from web sites, or code library files, narratives. They become context for the model to include in it's answers. 
+    She shows how to add more content to the chat session with the Add context button. But mine doesn't have that. I can get it though when I start a prompt with @. 
+    Advanced features include lots of things that Claude Code offers, like Rules for how to get certain things done in a manner consistent with your firm's preferences. 
+
+    I wonder if we could use the enhanced simulated annealing paper and github repo to speed up my SA. I could add that doc and codebase to the chat session. I didn't have much success doing that before, but models keep improving. I think early stopping is probabaly already captured most of the efficiency gains of that technique. 
+    
+    She frequently adds images (random) from unsplash.com. unsplash offers an API to pull random images using RESTful calls with options. 
+
+    Cursor Rules, now in the section Rules, Skills, Subagents. 
+    Rules can be global or local to a Project. 
+    Model Context Protocol (MCP) For docs on MCP go to http://modelcontextprotocol.io/introduction
+    To set up MCP servers, go to Cursor Settings --> Tools & MCP --> Add Custom MCP
+    Think if an MCP server that takes care of github actions for you. Imagine that! TO add the github you need the github personal access token. I need to put that in 1Password. Done. 
+    Smithery.ai for repository for MCP servers. One click install into cursor or other tools. It asked for my cursor ID, which is based on Google authentication. 
+    I created the github token across all repos but I may not have selected read and write access. It appears to be enough, since the new repo was created. This is the prompt: use the github mcp to create a new repo called "github-agent" and add a readme in it with details on Model Context Protocol. It's there: https://github.com/prentrodgers/github-agent
+    Neat! Cursor --> Smithery --> Github in less than a minute.
+    It's also local here: 
+        ls ~/Repos
+            One-footed-bride-tuning  github-agent
+    Very cool. 
+
+------------------
+Next up Vibe Coding with GitHub Copilot
+    Getting started. 
+    3 modes: Agent, Ask, Plan. These are new since this video was prepared in April 2025. They were Ask, Edit, Agent. Everything is changing so fast!
+
+    I asked Github copilot to create a presentation in black & white on my github repo:
+        I'm giving a presentation on my github repo at https://github.com/prentrodgers/One-footed-bride-tuning and I'd like to create some fancy black and white presentation charts covering the technology of tuning, Harry Partch's Tonality Diamond, Simulated Annealing on 4-note chords, the harmony and tuning of JS Bach, Csound sample based synthesis, and the music I've created synthesizing these tools.
+    It's building all kinds of charts, flow charts, block diagrams, all very official. He's using Mermaid diagrams. They are not very useful here. I can't use this. Don't give up yet. Ask him to figure something out. He's thinking. I set the model to Auto, and also added the Granite4 from my local Ollama instance. But I can't tell if it will use it in Copilot. 
+    She's covering inline coding feature now. She says to press ctrl-i to pull up Copilot inline. But for me it starts up Continue. I'm going to disable continue for a while. 
+    It works now. 
+    Edit Mode (Now called Agent mode) - natural language prompts and voice. She illustrates by creating a calculator app. 
+    She stresses the importance of putting in the chat the files that you want Copilot to work on with the @ sign. 
+    Ask mode for asking for help, but not allowing touching any of your files.
+    You can include all the code in the current directory by
+    1. click paper clip icon --> Add Context or ctrl-/
+    2. Select Codebase - doesn't work for me. 
+
+    Inline code completion. ctrl-i opens a tiny window inside your code where you can create a targetted update to the code from a prompt.
+
+    Agents can autonomousely execute multi-step tasks, coding or otherwise. 
+    
+    Advanced Copilot tools. 
+    Context Tools. How to focus Copilot on the files or tools that you want it to use. 
+    Slash commands. Open up chat --> Ask and press the slash command to direct Copilot to the right type of task for it to perform. 
+    Custom instructions - Provide organization specific preferences for how it does tasks. Can be json or markdown, but must be in specific places and names. 
+    For json, ctrl-shift p search for vscode workspace settings. In the root of the repo, it creates a  .vscode directory with settings.json file in it, with an empty set {}.
+    For Markdown, create .github folder. Inside that create copilot-instructions.md file with instructions there. For example:
+        The first line should be a brief summary under 50 characters. 
+        Leave a blank line.
+        The body should explain the change in detail, no more than 100 characters, Always begin the commit message with a relevant emoji
+    Then put a link in the settings.json to that markdown directory. 
+        {
+        "github.copilot.chat.commitMessageGeneration.instructions" [
+        : { "file": ".github/copilot-instructions.md" }
+        ]
+        }
