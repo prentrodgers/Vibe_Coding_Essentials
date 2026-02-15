@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI — The Future of AI Education</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --dark: #0f0f1a;
+            --dark-mid: #1a1a2e;
+            --body-bg: #f8f7f4;
+            --card-bg: #ffffff;
+            --text: #1a1a2e;
+            --text-muted: #6b6b7b;
+            --accent: #e8573a;
+            --accent-hover: #d1442a;
+            --border: #e8e6e1;
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font);
+            background: var(--body-bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { display: block; max-width: 100%; height: auto; }
+
+        /* ── Typography ── */
+        h1, h2, h3 { line-height: 1.1; letter-spacing: -0.03em; }
+        h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 900; }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; }
+        h3 { font-size: 1.25rem; font-weight: 700; }
+
+        /* ── Layout ── */
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+        /* ── Nav ── */
+        .nav {
+            position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 24px 0;
+        }
+        .nav .wrap {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo {
+            font-weight: 900; font-size: 1.4rem; color: #fff;
+            text-decoration: none; letter-spacing: -0.03em;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-links {
+            display: flex; align-items: center; gap: 36px; list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none; color: rgba(255,255,255,0.7); font-size: 0.95rem;
+            font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #fff; }
+        .nav-cta {
+            padding: 10px 24px; background: var(--accent); color: #fff !important;
+            border-radius: 8px; font-weight: 600; transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--accent-hover); }
+
+        /* ── Buttons ── */
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 16px 32px; border-radius: 10px; font-weight: 600;
+            font-size: 1rem; text-decoration: none; transition: all 0.2s;
+            cursor: pointer; border: none; font-family: var(--font);
+        }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .btn-ghost {
+            background: rgba(255,255,255,0.1); color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.18); }
+        .btn-white { background: #fff; color: var(--dark); }
+        .btn-white:hover { background: #f0efec; transform: translateY(-1px); }
+
+        /* ── Hero ── */
+        .hero {
+            background: var(--dark);
+            color: #fff;
+            padding: 160px 0 100px;
+            overflow: hidden;
+        }
+        .hero .wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+        .hero-content p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.2rem;
+            margin: 24px 0 40px;
+            max-width: 480px;
+            line-height: 1.7;
+        }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-visual img {
+            border-radius: 16px;
+            width: 100%;
+        }
+
+        /* ── Stats Bar ── */
+        .stats {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 48px 0;
+        }
+        .stats .wrap {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            font-size: 2.2rem; font-weight: 900; color: var(--text);
+            letter-spacing: -0.03em;
+        }
+        .stat-label {
+            font-size: 0.9rem; color: var(--text-muted); font-weight: 500;
+            margin-top: 4px;
+        }
+
+        /* ── Section shared ── */
+        .section-label {
+            font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px;
+        }
+        .section-title { margin-bottom: 16px; }
+        .section-desc {
+            color: var(--text-muted); font-size: 1.1rem; max-width: 520px;
+        }
+        .section-header { margin-bottom: 64px; }
+
+        /* ── Features ── */
+        .features {
+            padding: 120px 0;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+        .feature-icon {
+            width: 56px; height: 56px; border-radius: 14px;
+            background: #fef0ed; color: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; margin-bottom: 24px;
+        }
+        .feature-card h3 { margin-bottom: 12px; }
+        .feature-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+
+        /* ── Courses ── */
+        .courses {
+            padding: 120px 0;
+            background: #fff;
+        }
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .course-card {
+            background: var(--body-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+        .course-thumb img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+        .course-body { padding: 28px; }
+        .course-badge {
+            display: inline-block; padding: 5px 14px; border-radius: 6px;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; margin-bottom: 16px;
+        }
+        .badge-beginner { background: #e8f5e9; color: #2e7d32; }
+        .badge-intermediate { background: #fff3e0; color: #e65100; }
+        .badge-advanced { background: #fce4ec; color: #c62828; }
+        .course-body h3 { margin-bottom: 10px; font-size: 1.15rem; }
+        .course-body p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+        .course-meta {
+            display: flex; gap: 20px; margin-top: 20px; padding-top: 16px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem; color: var(--text-muted); font-weight: 500;
+        }
+
+        /* ── Testimonial ── */
+        .testimonial {
+            padding: 120px 0;
+        }
+        .testimonial .wrap {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 64px;
+            align-items: center;
+            max-width: 900px;
+        }
+        .testimonial-avatar img {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .testimonial-content blockquote {
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 1.6;
+            color: var(--text);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+        .testimonial-name { font-weight: 700; font-size: 1.05rem; }
+        .testimonial-role { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* ── CTA Banner ── */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--dark) 0%, #2a1a4e 100%);
+            color: #fff;
+            text-align: center;
+        }
+        .cta h2 { color: #fff; margin-bottom: 16px; }
+        .cta p {
+            color: rgba(255,255,255,0.65); font-size: 1.15rem;
+            max-width: 480px; margin: 0 auto 40px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            padding: 48px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+        .footer a {
+            color: var(--text); text-decoration: none; font-weight: 500;
+            transition: color 0.2s;
+        }
+        .footer a:hover { color: var(--accent); }
+        .footer-links {
+            display: flex; gap: 32px; justify-content: center;
+            list-style: none; margin-bottom: 16px;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .hero .wrap { grid-template-columns: 1fr; text-align: center; }
+            .hero-content p { margin-left: auto; margin-right: auto; }
+            .hero-actions { justify-content: center; }
+            .hero-visual { order: -1; max-width: 480px; margin: 0 auto; }
+            .features-grid, .courses-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+            .testimonial .wrap { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+            .stats .wrap { gap: 40px; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .hero { padding: 120px 0 64px; }
+            .features, .courses, .testimonial { padding: 80px 0; }
+            .section-header { margin-bottom: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav class="nav">
+    <div class="wrap">
+        <a href="#" class="nav-logo">nexus<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#testimonial">Reviews</a></li>
+            <li><a href="#cta" class="nav-cta">Start Free</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+    <div class="wrap">
+        <div class="hero-content">
+            <h1>Learn AI the<br>way it should<br>be taught.</h1>
+            <p>Hands-on courses designed by engineers, not academics. Build real projects from day one — no prerequisites, no fluff.</p>
+            <div class="hero-actions">
+                <a href="#courses" class="btn btn-primary">Explore Courses</a>
+                <a href="#features" class="btn btn-ghost">How It Works</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="https://placehold.co/600x440/1a1a2e/eee?text=Neural+Network" alt="Neural network visualization" width="600" height="440" fetchpriority="high">
+        </div>
+    </div>
+</section>
+
+<!-- ── Stats Bar ── -->
+<section class="stats">
+    <div class="wrap">
+        <div class="stat">
+            <div class="stat-number">50K+</div>
+            <div class="stat-label">Students Enrolled</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">120+</div>
+            <div class="stat-label">Lessons Available</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">4.9</div>
+            <div class="stat-label">Average Rating</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Features ── -->
+<section class="features" id="features">
+    <div class="wrap">
+        <div class="section-header">
+            <div class="section-label">Why Nexus</div>
+            <h2 class="section-title">Built for builders,<br>not test-takers.</h2>
+            <p class="section-desc">Every detail is designed to get you from zero to shipping real AI — fast.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">&#9881;</div>
+                <h3>Project-First Curriculum</h3>
+                <p>Build image classifiers, chatbots, and recommendation engines — not toy examples that gather dust.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#9000;</div>
+                <h3>Browser-Based Labs</h3>
+                <p>Run Python and PyTorch directly in your browser. Zero setup, instant feedback on every exercise.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#9733;</div>
+                <h3>Expert Mentorship</h3>
+                <p>Get code reviews from practicing ML engineers. Join study groups and never learn alone.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Courses ── -->
+<section class="courses" id="courses">
+    <div class="wrap">
+        <div class="section-header">
+            <div class="section-label">Courses</div>
+            <h2 class="section-title">Start anywhere.<br>Go everywhere.</h2>
+            <p class="section-desc">Every course is self-contained and project-driven. Pick the one that fits your level.</p>
+        </div>
+        <div class="courses-grid">
+
+            <div class="course-card">
+                <div class="course-thumb">
+                    <img src="https://placehold.co/480x270/e8f5e9/2e7d32?text=Machine+Learning" alt="Intro to Machine Learning" width="480" height="270" loading="lazy">
+                </div>
+                <div class="course-body">
+                    <span class="course-badge badge-beginner">Beginner</span>
+                    <h3>Intro to Machine Learning</h3>
+                    <p>Supervised & unsupervised learning with scikit-learn through five real-world projects.</p>
+                    <div class="course-meta">
+                        <span>12 lessons</span>
+                        <span>5 projects</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-thumb">
+                    <img src="https://placehold.co/480x270/e3f2fd/1565c0?text=Deep+Learning" alt="Deep Learning & Neural Nets" width="480" height="270" loading="lazy">
+                </div>
+                <div class="course-body">
+                    <span class="course-badge badge-intermediate">Intermediate</span>
+                    <h3>Deep Learning & Neural Nets</h3>
+                    <p>Build CNNs, RNNs, and transformers from scratch with PyTorch. GPU-powered labs included.</p>
+                    <div class="course-meta">
+                        <span>18 lessons</span>
+                        <span>7 projects</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-thumb">
+                    <img src="https://placehold.co/480x270/f3e5f5/7b1fa2?text=LLMs+%26+Prompting" alt="LLMs & Prompt Engineering" width="480" height="270" loading="lazy">
+                </div>
+                <div class="course-body">
+                    <span class="course-badge badge-advanced">Advanced</span>
+                    <h3>LLMs & Prompt Engineering</h3>
+                    <p>GPT architecture, fine-tuning, RAG, and building production AI applications.</p>
+                    <div class="course-meta">
+                        <span>15 lessons</span>
+                        <span>4 projects</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── Testimonial ── -->
+<section class="testimonial" id="testimonial">
+    <div class="wrap">
+        <div class="testimonial-avatar">
+            <img src="https://placehold.co/120x120/1a1a2e/eee?text=PS" alt="Priya Sharma avatar" width="120" height="120" loading="lazy">
+        </div>
+        <div class="testimonial-content">
+            <blockquote>"I tried three other platforms before Nexus. The difference is night and day — the projects actually prepare you for real work."</blockquote>
+            <div class="testimonial-name">Priya Sharma</div>
+            <div class="testimonial-role">ML Engineer at Stripe</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta" id="cta">
+    <div class="wrap">
+        <h2>Start learning AI today.</h2>
+        <p>Join 50,000+ learners building real AI projects. Your first course is completely free.</p>
+        <a href="#" class="btn btn-white">Create Free Account</a>
+    </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+    <div class="wrap">
+        <ul class="footer-links">
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+        </ul>
+        <p>&copy; 2026 Nexus AI. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
